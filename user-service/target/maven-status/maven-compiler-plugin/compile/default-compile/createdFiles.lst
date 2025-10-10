@@ -1,0 +1,11 @@
+com/ecommerce/userservice/config/RabbitMQConfig.class
+com/ecommerce/userservice/controller/UserController.class
+com/ecommerce/userservice/dto/UserRegistrationDto.class
+com/ecommerce/userservice/config/SecurityConfig.class
+com/ecommerce/userservice/service/MessagePublisher.class
+com/ecommerce/userservice/config/JpaConfig.class
+com/ecommerce/userservice/UserServiceApplication.class
+com/ecommerce/userservice/service/UserService.class
+com/ecommerce/userservice/model/User.class
+com/ecommerce/userservice/repository/UserRepository.class
+com/ecommerce/userservice/dto/UserResponseDto.class

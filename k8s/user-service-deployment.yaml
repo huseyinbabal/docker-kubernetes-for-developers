@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-service
+  name: user-service
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://admin:secret@mysql:3306/mydb
+        image: ghcr.io/huseyinbabal/user-service:1.0.0-rc.2
+        imagePullPolicy: IfNotPresent
+        name: product-service
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "128m"
+      restartPolicy: Always
