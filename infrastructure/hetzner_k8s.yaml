@@ -1,0 +1,109 @@
+---
+hetzner_token: .....
+cluster_name: training
+kubeconfig_path: "./kubeconfig"
+k3s_version: v1.33.4+k3s1
+
+networking:
+  ssh:
+    port: 22
+    use_agent: false # set to true if your key has a passphrase
+    public_key_path: "~/.ssh/id_rsa.pub"
+    private_key_path: "~/.ssh/id_rsa"
+  allowed_networks:
+    ssh:
+      - 0.0.0.0/0
+    api: # this will firewall port 6443 on the nodes
+      - 0.0.0.0/0
+  public_network:
+    ipv4: true
+    ipv6: true
+  private_network:
+    enabled: true
+    subnet: 10.1.0.0/24
+    existing_network_name: ""
+  cni:
+    enabled: true
+    encryption: false
+    mode: flannel
+  # cluster_cidr: 10.244.0.0/16 # optional: a custom IPv4/IPv6 network CIDR to use for pod IPs
+  # service_cidr: 10.43.0.0/16 # optional: a custom IPv4/IPv6 network CIDR to use for service IPs. Warning, if you change this, you should also change cluster_dns!
+  # cluster_dns: 10.43.0.10 # optional: IPv4 Cluster IP for coredns service. Needs to be an address from the service_cidr range
+
+# manifests:
+#   cloud_controller_manager_manifest_url: "https://github.com/hetznercloud/hcloud-cloud-controller-manager/releases/download/v1.20.0/ccm-networks.yaml"
+#   csi_driver_manifest_url: "https://raw.githubusercontent.com/hetznercloud/csi-driver/v2.9.0/deploy/kubernetes/hcloud-csi.yml"
+#   system_upgrade_controller_deployment_manifest_url: "https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.4/system-upgrade-controller.yaml"
+#   system_upgrade_controller_crd_manifest_url: "https://github.com/rancher/system-upgrade-controller/releases/download/v0.13.4/crd.yaml"
+#   cluster_autoscaler_manifest_url: "https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/hetzner/examples/cluster-autoscaler-run-on-master.yaml"
+
+datastore:
+  mode: etcd # etcd (default) or external
+
+schedule_workloads_on_masters: false
+
+# image: rocky-9 # optional: default is ubuntu-24.04
+# autoscaling_image: 103908130 # optional, defaults to the `image` setting
+# snapshot_os: microos # optional: specified the os type when using a custom snapshot
+
+masters_pool:
+  instance_type: cpx11
+  instance_count: 3
+  locations:
+    - fsn1
+    - hel1
+    - nbg1
+
+worker_node_pools:
+  # - name: application
+  #   instance_type: cx32
+  #   instance_count: 3
+  #   location: hel1
+  # image: debian-11
+  # labels:
+  #   - key: purpose
+  #     value: blah
+  # taints:
+  #   - key: something
+  #     value: value1:NoSchedule
+  - name: worker
+    instance_type: cx22
+    instance_count: 1
+    location: nbg1
+    autoscaling:
+      enabled: true
+      min_instances: 1
+      max_instances: 3
+
+embedded_registry_mirror:
+  enabled: false # Check if your k3s version is compatible before enabling this option. You can find more information at https://docs.k3s.io/installation/registry-mirror
+
+# additional_packages:
+# - somepackage
+
+# post_create_commands:
+# - apt update
+# - apt upgrade -y
+# - apt autoremove -y
+
+# kube_api_server_args:
+# - arg1
+# - ...
+# kube_scheduler_args:
+# - arg1
+# - ...
+# kube_controller_manager_args:
+# - arg1
+# - ...
+# kube_cloud_controller_manager_args:
+# - arg1
+# - ...
+# kubelet_args:
+# - arg1
+# - ...
+# kube_proxy_args:
+# - arg1
+# - ...
+# api_server_hostname: k8s.example.com # optional: DNS for the k8s API LoadBalancer. After the script has run, create a DNS record with the address of the API LoadBalancer.
+protect_against_deletion: false
+
