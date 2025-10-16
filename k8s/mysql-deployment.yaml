@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet 
 metadata:
   name: mysql
 spec:
@@ -26,6 +26,17 @@ spec:
               value: admin
             - name: MYSQL_PASSWORD
               value: secret
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql 
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi
 ---
 apiVersion: v1
 kind: Service
@@ -33,6 +44,7 @@ metadata:
   name: mysql
 spec:
   type: ClusterIP
+  clusterIP: None
   selector:
     app: mysql
   ports:

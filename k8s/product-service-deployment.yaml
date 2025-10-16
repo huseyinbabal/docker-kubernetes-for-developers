@@ -22,9 +22,17 @@ spec:
     spec:
       containers:
       - env:
-        - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://admin:secret@mysql:3306/mydb
-        image: ghcr.io/huseyinbabal/product-service:1.0.0-rc.1
+        - name: DATABASE_HOST 
+          value: postgres.default.svc.cluster.local
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_USER
+          value: postgres 
+        - name: DATABASE_PASSWORD
+          value: password 
+        - name: DATABASE_NAME
+          value: productdb 
+        image: ghcr.io/huseyinbabal/product-service:1.0.0-rc.3
         imagePullPolicy: IfNotPresent
         name: product-service
         resources:
@@ -32,3 +40,16 @@ spec:
             memory: "256Mi"
             cpu: "128m"
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  type: ClusterIP
+  selector:
+    app: product-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+
