@@ -44,7 +44,7 @@ jobs:
         id: context
         run: |
           # Extract the name from the full path
-          IMAGE_NAME=$(basename ${{ matrix.dockerfile }})
+          IMAGE_NAME=$(dirname ${{ matrix.dockerfile }})
           # Get the directory path
           CONTEXT=$(dirname ${{ matrix.dockerfile }})
 
