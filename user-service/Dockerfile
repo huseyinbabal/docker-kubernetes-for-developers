@@ -8,7 +8,7 @@ RUN mvn clean package
 
 FROM amazoncorretto:21.0.0
 
-COPY --from=bulder target/user-service-1.0.0.jar app.jar
+COPY --from=builder target/user-service-1.0.0.jar app.jar
 
 EXPOSE 8080
 
