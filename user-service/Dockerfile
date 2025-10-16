@@ -1,8 +1,14 @@
-FROM openjdk:21-jdk-slim
+FROM maven:3-amazoncorretto-21 as builder
 
 WORKDIR /app
 
-COPY target/user-service-1.0.0.jar app.jar
+COPY . .
+
+RUN mvn clean package
+
+FROM amazoncorretto:21.0.0
+
+COPY --from=bulder target/user-service-1.0.0.jar app.jar
 
 EXPOSE 8080
 
