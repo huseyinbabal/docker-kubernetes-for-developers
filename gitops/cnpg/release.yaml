@@ -8,6 +8,7 @@ spec:
   releaseName: cnpg-operator
   chart:
     spec: 
+      interval: 5m
       chart: cloudnative-pg
       version: 0.26.0
       sourceRef:
