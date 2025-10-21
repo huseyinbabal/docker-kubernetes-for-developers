@@ -6,3 +6,5 @@ metadata:
 spec:
   image: ghcr.io/huseyinbabal/product-service
   interval: 1m
+  secretRef:
+    name: ghcr-pull-secret
