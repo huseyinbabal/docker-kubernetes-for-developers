@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: product-service
+  namespace: flux-system
+spec:
+  image: ghcr.io/huseyinbabal/product-service
+  interval: 1m
+  secretRef:
+    name: ghcr-pull-secret
