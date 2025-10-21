@@ -23,15 +23,18 @@ spec:
       containers:
       - env:
         - name: DATABASE_HOST 
-          value: postgres.default.svc.cluster.local
+          value: product-rw.product-system.svc.cluster.local
         - name: DATABASE_PORT
           value: "5432"
         - name: DATABASE_USER
-          value: postgres 
+          value: app 
         - name: DATABASE_PASSWORD
-          value: password 
+          valueFrom:
+            secretKeyRef:
+              name: product-app 
+              key: username
         - name: DATABASE_NAME
-          value: productdb 
+          value: app 
         image: ghcr.io/huseyinbabal/product-service:1.0.0-rc.3
         imagePullPolicy: IfNotPresent
         name: product-service
