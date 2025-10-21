@@ -32,7 +32,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: product-app 
-              key: username
+              key: password
         - name: DATABASE_NAME
           value: app 
         image: ghcr.io/huseyinbabal/product-service:1.0.0-rc.3
