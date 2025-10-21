@@ -1,0 +1,34 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "1h"
+    fluxcd.controlplane.io/reconcileArtifactEvery: "1h"
+    fluxcd.controlplane.io/reconcileTimeout: "5m"
+spec:
+  distribution:
+    version: "2.7.x"
+    registry: "ghcr.io/fluxcd"
+  cluster:
+    type: kubernetes
+    networkPolicy: true
+  components:
+    - source-controller
+    - notification-controller
+    - image-reflector-controller
+    - image-automation-controller
+    - kustomize-controller
+    - helm-controller
+  sync:
+    kind: GitRepository 
+    url: https://github.com/huseyinbabal/docker-kubernetes-for-developers
+    path: gitops
+    ref: refs/heads/master
+
+
+
+
+
+
