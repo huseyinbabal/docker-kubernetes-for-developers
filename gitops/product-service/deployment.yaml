@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: product-service
+  name: product-service
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_HOST 
+          value: postgres.default.svc.cluster.local
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_USER
+          value: postgres 
+        - name: DATABASE_PASSWORD
+          value: password 
+        - name: DATABASE_NAME
+          value: productdb 
+        image: ghcr.io/huseyinbabal/product-service:1.0.0-rc.3
+        imagePullPolicy: IfNotPresent
+        name: product-service
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "128m"
+      restartPolicy: Always
