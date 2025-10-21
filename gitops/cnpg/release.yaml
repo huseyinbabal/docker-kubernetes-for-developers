@@ -7,12 +7,13 @@ spec:
   targetNamespace: cnpg-system
   releaseName: cnpg-operator
   chart:
-    spec: cloudnative-pg
-    version: 0.26.0
-    sourceRef:
-      kind: HelmRepository
-      name: cnpg
-      namespace: flux-system
+    spec: 
+      chart: cloudnative-pg
+      version: 0.26.0
+      sourceRef:
+        kind: HelmRepository
+        name: cnpg
+        namespace: flux-system
   install:
     createNamespace: true
 
