@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: product-service
-  name: product-service
-  namespace: product-system
+    app: user-service
+  name: user-service
+  namespace: user-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: product-service
+      app: user-service
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,28 +18,54 @@ spec:
   template:
     metadata:
       labels:
-        app: product-service
+        app: user-service
     spec:
       containers:
       - env:
-        - name: DATABASE_HOST 
-          value: product-rw.product-system.svc.cluster.local
-        - name: DATABASE_PORT
-          value: "5432"
-        - name: DATABASE_USER
-          value: app 
-        - name: DATABASE_PASSWORD
+        - name: SPRING_DATASOURCE_URL
           valueFrom:
             secretKeyRef:
-              name: product-app 
-              key: password
-        - name: DATABASE_NAME
-          value: app 
-        image: ghcr.io/huseyinbabal/product-service # {"$imagepolicy": "product-system:product-service"}
+              name: user-service
+              key: spring-datasource-url
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: user-service
+              key: server-port
+        volumeMounts:
+        - name: app-properties
+          mountPath: /var/log
+        image: ghcr.io/huseyinbabal/user-service:1.0.0-rc.2
         imagePullPolicy: IfNotPresent
-        name: product-service
+        name: user-service
         resources:
           requests:
             memory: "256Mi"
             cpu: "128m"
       restartPolicy: Always
+      volumes:
+      - name: app-properties
+        configMap:
+          name: app-properties
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: user-service
+data:
+  spring-datasource-url: amRiYzpteXNxbDovL2FkbWluOnNlY3JldEBteXNxbDozMzA2L215ZGI=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service
+data:
+  server-port: "8085"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-properties
+data:
+  application.name: user-service
+  application.port: "9097"

@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata: 
-  name: product-service
+  name: user-service
   namespace: flux-system
 spec:
   interval: 1m
@@ -20,5 +20,5 @@ spec:
     push:
       branch: master
   update:
-    path: ./gitops/product-service/
+    path: ./gitops/user-service/
     strategy: Setters

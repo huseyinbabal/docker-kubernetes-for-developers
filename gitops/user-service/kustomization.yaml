@@ -10,6 +10,6 @@ resources:
 - image-policy.yaml
 - image-repository.yaml
 images:
-  - name: ghcr.io/huseyinbabal/product-service
-    newName: ghcr.io/huseyinbabal/product-service # {"$imagepolicy": "flux-system:product-service:name"}
-    newTag: 1.0.0-rc.8 # {"$imagepolicy": "flux-system:product-service:tag"} 
+  - name: ghcr.io/huseyinbabal/user-service
+    newName: ghcr.io/huseyinbabal/user-service # {"$imagepolicy": "flux-system:user-service:name"}
+    newTag: 1.0.0-rc.8 # {"$imagepolicy": "flux-system:user-service:tag"} 
