@@ -1,9 +1,11 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
 metadata:
-  name: product
-  namespace: product-system
+  name: user-service
 spec:
-  instances: 3
+  database: users
+
+  port: 3306
+
   storage:
     size: 1Gi
