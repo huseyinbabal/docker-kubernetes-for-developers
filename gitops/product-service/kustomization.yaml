@@ -8,3 +8,4 @@ resources:
 - service.yaml
 - image-update-automation.yaml
 - image-policy.yaml
+- image-repository.yaml
