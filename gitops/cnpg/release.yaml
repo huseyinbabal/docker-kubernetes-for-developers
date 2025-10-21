@@ -4,11 +4,11 @@ metadata:
   name: cnpg-operator
   namespace: cnpg-system
 spec:
+  interval: 5m
   targetNamespace: cnpg-system
   releaseName: cnpg-operator
   chart:
     spec: 
-      interval: 5m
       chart: cloudnative-pg
       version: 0.26.0
       sourceRef:
