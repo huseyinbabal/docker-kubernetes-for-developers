@@ -8,6 +8,9 @@ spec:
 
   replicas: 3
 
+  replication:
+    enabled: true
+
   port: 3306
 
   storage:
