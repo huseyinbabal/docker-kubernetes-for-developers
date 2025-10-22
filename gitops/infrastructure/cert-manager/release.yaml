@@ -17,7 +17,9 @@ spec:
   install:
     createNamespace: true
   values:
-    installCRDs: true
+    crds:
+      enabled: true
+      keep: false
     prometheus:
       enabled: true
       servicemonitor:
