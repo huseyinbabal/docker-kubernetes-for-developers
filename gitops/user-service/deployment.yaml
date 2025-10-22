@@ -52,6 +52,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: user-service
+  namespace: user-system
 data:
   spring-datasource-url: amRiYzpteXNxbDovL2FkbWluOnNlY3JldEBteXNxbDozMzA2L215ZGI=
 ---
@@ -59,12 +60,14 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: user-service
+  namespace: user-system
 data:
   server-port: "8085"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  namespace: user-system
   name: app-properties
 data:
   application.name: user-service
