@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: vault
+  namespace: vault
+spec:
+  interval: 12h
+  url: oci://ghcr.io/bank-vaults/helm-charts/vault-operator
+  ref:
+    semver: ">=0.0.0"

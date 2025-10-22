@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kiali-server
+      version: "2.9.0" # You can check for the latest version
+      sourceRef:
+        kind: HelmRepository
+        name: kiali
+        namespace: flux-system

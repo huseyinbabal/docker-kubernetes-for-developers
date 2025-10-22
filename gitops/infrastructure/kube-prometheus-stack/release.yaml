@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: "69.3.1"  # You can check for the latest version
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  values:
+    grafana:
+      persistence:
+        enabled: true
+        size: 10Gi
+      additionalDataSources:
+        - name: Tempo
+          type: tempo
+          uid: tempo
+          url: http://tempo.monitoring:3100
+          jsonData:
+            httpMethod: GET
+            serviceMap:
+              datasourceUid: prometheus
+            search:
+              hide: false
+            nodeGraph:
+              enabled: true
+
+    prometheus:
+      prometheusSpec:
+        retention: 5d
+        additionalArgs:
+          - name: "web.enable-remote-write-receiver"
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
+        serviceMonitorSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+
+    alertmanager:
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
