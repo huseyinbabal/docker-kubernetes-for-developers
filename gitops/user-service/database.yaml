@@ -2,6 +2,7 @@ apiVersion: k8s.mariadb.com/v1alpha1
 kind: MariaDB
 metadata:
   name: user-service
+  namespace: user-system
 spec:
   database: users
 
