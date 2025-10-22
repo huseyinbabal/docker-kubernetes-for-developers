@@ -6,6 +6,8 @@ metadata:
 spec:
   database: users
 
+  replicas: 3
+
   port: 3306
 
   storage:
