@@ -27,6 +27,13 @@ spec:
             secretKeyRef:
               name: user-service-credentials
               key: SPRING_DATASOURCE_URL
+        - name: SPRING_DATASOURCE_USERNAME
+          value: root
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: user-database-root
+              key: password
         - name: SERVER_PORT
           valueFrom:
             configMapKeyRef:
