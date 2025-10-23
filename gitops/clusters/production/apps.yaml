@@ -5,6 +5,8 @@ metadata:
   name: apps
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-controllers
   interval: 10m
   path: ./gitops/apps/production
   prune: true
