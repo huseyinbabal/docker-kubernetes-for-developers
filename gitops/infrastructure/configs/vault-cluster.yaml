@@ -167,6 +167,10 @@ spec:
 
 
     auth:
+      - type: userpass
+        users:
+          - username: admin
+            password: adminpassword
       - type: kubernetes
         roles:
           # Allow every pod in the default namespace to use the secret kv store
