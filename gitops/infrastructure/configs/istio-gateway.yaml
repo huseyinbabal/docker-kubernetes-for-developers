@@ -20,7 +20,7 @@ spec:
         name: https
         protocol: HTTPS
       hosts:
-        - "api.jarvis.dev"
+        - "api.jarvisdev.io"
       tls:
         mode: SIMPLE
         credentialName: istio-gateway-tls
@@ -36,4 +36,4 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer 
   dnsNames:
-    - "api.jarvis.dev"
+    - "api.jarvisdev.io"
