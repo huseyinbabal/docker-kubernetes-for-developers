@@ -20,5 +20,5 @@ spec:
     push:
       branch: master
   update:
-    path: ./gitops/apps/user-service/
+    path: ./gitops/apps/base/user-service/
     strategy: Setters

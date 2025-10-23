@@ -20,5 +20,5 @@ spec:
     push:
       branch: master
   update:
-    path: ./gitops/apps/product-service/
+    path: ./gitops/apps/base/product-service/
     strategy: Setters
