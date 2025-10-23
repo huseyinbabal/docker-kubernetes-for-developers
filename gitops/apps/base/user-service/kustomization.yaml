@@ -8,6 +8,7 @@ resources:
 - image-update-automation.yaml
 - image-policy.yaml
 - image-repository.yaml
+- virtual-service.yaml
 images:
 - name: ghcr.io/huseyinbabal/user-service
   newName: ghcr.io/huseyinbabal/user-service # {"$imagepolicy": "flux-system:user-service:name"}

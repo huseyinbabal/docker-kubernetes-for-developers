@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: product-service
+  namespace: product-system
+spec:
+  hosts:
+    - "api.jarvisdev.io"
+  gateways:
+    - istio-system/product-ingress-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: product-service
+            port:
+              number: 80

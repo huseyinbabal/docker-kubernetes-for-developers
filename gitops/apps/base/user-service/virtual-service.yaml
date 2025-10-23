@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: user-service
+  namespace: user-system
+spec:
+  hosts:
+    - "api.jarvisdev.io"
+  gateways:
+    - istio-system/user-ingress-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: user-service
+            port:
+              number: 80
