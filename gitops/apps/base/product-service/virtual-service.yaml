@@ -12,6 +12,8 @@ spec:
     - match:
         - uri:
             prefix: "/products"
+      rewrite:
+        uri: "/"
       route:
         - destination:
             host: product-service

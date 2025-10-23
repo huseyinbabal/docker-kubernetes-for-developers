@@ -12,6 +12,8 @@ spec:
     - match:
         - uri:
             prefix: "/users"
+      rewrite:
+        uri: "/"
       route:
         - destination:
             host: user-service
