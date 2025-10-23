@@ -5,3 +5,4 @@ resources:
   - cloudflare-credentials.yaml
   - cluster-issuer.yaml
   - istio-gateway.yaml
+  - vault-cluster.yaml
