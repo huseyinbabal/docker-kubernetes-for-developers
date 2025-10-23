@@ -6,4 +6,3 @@ resources:
   - rbac.yaml
   - repository.yaml
   - release.yaml
-  - vault-cluster.yaml
