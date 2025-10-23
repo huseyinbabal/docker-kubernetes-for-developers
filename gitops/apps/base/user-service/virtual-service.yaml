@@ -7,7 +7,7 @@ spec:
   hosts:
     - "api.jarvisdev.io"
   gateways:
-    - istio-system/user-ingress-gateway
+    - istio-system/microservices-ingress-gateway
   http:
     - match:
         - uri:
@@ -16,4 +16,4 @@ spec:
         - destination:
             host: user-service
             port:
-              number: 80
+              number: 8080
