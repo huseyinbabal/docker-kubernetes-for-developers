@@ -25,8 +25,8 @@ spec:
         - name: SPRING_DATASOURCE_URL
           valueFrom:
             secretKeyRef:
-              name: user-service
-              key: spring-datasource-url
+              name: user-service-credentials
+              key: SPRING_DATASOURCE_URL
         - name: SERVER_PORT
           valueFrom:
             configMapKeyRef:
