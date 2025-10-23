@@ -1,7 +1,7 @@
 apiVersion: k8s.mariadb.com/v1alpha1
 kind: MariaDB
 metadata:
-  name: user-service
+  name: user-database
   namespace: user-system
 spec:
   database: users
@@ -24,7 +24,7 @@ metadata:
 spec:
   name: user
   mariaDbRef:
-    name: user-service
+    name: user-database
   maxUserConnections: 20
   host: "%"
   # Delete the resource in the database whenever the CR gets deleted.
