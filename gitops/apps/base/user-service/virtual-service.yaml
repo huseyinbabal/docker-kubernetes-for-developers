@@ -16,6 +16,6 @@ spec:
         uri: "/"
       route:
         - destination:
-            host: user-service
+            host: user-service.user-system.svc.cluster.local
             port:
               number: 8080

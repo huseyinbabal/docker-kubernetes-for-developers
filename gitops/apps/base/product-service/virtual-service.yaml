@@ -16,6 +16,6 @@ spec:
         uri: "/"
       route:
         - destination:
-            host: product-service
+            host: product-service.product-system.svc.cluster.local
             port:
               number: 8080
