@@ -13,4 +13,4 @@ resources:
 images:
 - name: ghcr.io/huseyinbabal/user-service
   newName: ghcr.io/huseyinbabal/user-service # {"$imagepolicy": "flux-system:user-service:name"}
-  newTag: 1.0.2 # {"$imagepolicy": "flux-system:user-service:tag"} 
+  newTag: 1.0.3 # {"$imagepolicy": "flux-system:user-service:tag"} 
