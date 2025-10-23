@@ -4,3 +4,4 @@ resources:
   - cluster-secret-store.yaml
   - cloudflare-credentials.yaml
   - cluster-issuer.yaml
+  - istio-gateway.yaml

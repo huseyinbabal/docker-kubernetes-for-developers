@@ -1,0 +1,39 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: microservices-ingress-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: gateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "api.jarvis.dev"
+      tls:
+        httpsRedirect: true
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      hosts:
+        - "api.jarvis.dev"
+      tls:
+        mode: SIMPLE
+        credentialName: istio-gateway-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: istio-gateway-cert
+  namespace: istio-system
+spec:
+  secretName: istio-gateway-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer 
+  dnsNames:
+    - "api.jarvis.dev"
