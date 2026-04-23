@@ -38,6 +38,7 @@ runcmd:
   - apt-get update
   - apt-get install -y kubelet kubeadm kubectl
   - apt-mark hold kubelet kubeadm kubectl
+  - echo "KUBELET_EXTRA_ARGS=--node-ip=$(hostname -I | awk '{print $2}')" > /etc/default/kubelet
   - systemctl enable --now kubelet
 
   # --- Initialize control plane ---
