@@ -6,4 +6,3 @@ resources:
   - cluster-issuer.yaml
   - istio-gateway.yaml
   - vault-cluster.yaml
-  - metallb-pool.yaml
